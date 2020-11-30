@@ -34,15 +34,9 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        User::query()->creat([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'password' => Hash::make($request -> get('password')),
-        ]);
+        $user = User::create($request->all());
 
-        return response()->json([
-            'message' => 'User created'
-        ], 201);
+        return response()->json($user, 201);
     }
 
     /**
