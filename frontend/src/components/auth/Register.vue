@@ -78,7 +78,6 @@
           this.$store.dispatch('login', this.user_credantials).then((res) => {
             this.$router.push({name: 'User_Profile'})
           })
-          console.log(res.data.message)
         }).finally(() => {
           this.loader = false
           this.registerd = true

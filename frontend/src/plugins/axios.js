@@ -11,7 +11,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     config.headers['X-Requested-With'] = 'XMLHttpRequest';
-    config.headers['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`
+    config.headers['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;
     return config
   },
   error => {

@@ -55,7 +55,7 @@ export default {
     },
     roleCheck(context, data){
       return new Promise((resolve, reject) => {
-        axios.get('/role-check').then(res => {
+        axios.get('/role').then(res => {
           if (res && res.status >= 200 && res.status <= 399) {
             context.commit('role_setter', res.data.role)
             resolve(res)

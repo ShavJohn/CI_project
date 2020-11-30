@@ -15,11 +15,24 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::post('/register', 'Auth\AuthController@register');
+
+Route::post('/login', 'Auth\AuthController@login');
+
+
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/logout', 'Auth\AuthController@logout');
-    Route::get('/role-check', 'Auth\AuthController@roleCheker');
+    Route::get('/role', 'Auth\AuthController@roleCheker');
 
+
+    Route::group(['middleware' => 'admin'], function () {
+        Route::get('/users/{page}', 'Admin\UsersController@index');
+        Route::get('/user/{user}', 'Admin\UsersController@show');
+        Route::post('/users', 'Admin\UsersController@store');
+        Route::put('/user/{user}', 'Admin\UsersController@update');
+        Route::delete('/user/{user}', 'Admin\UsersController@destroy' );
+    });
 });
-Route::get('/get-users/{page}', 'UsersController@getUsers');
-Route::post('/login', 'Auth\AuthController@login');
-Route::post('/register', 'Auth\AuthController@register');
+
+
