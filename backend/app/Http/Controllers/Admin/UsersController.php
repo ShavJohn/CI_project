@@ -27,11 +27,12 @@ class UsersController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function store(Request $request)
     {
         User::query()->creat([
             'name' => $request->get('name'),
@@ -41,20 +42,7 @@ class UsersController extends Controller
 
         return response()->json([
             'message' => 'User created'
-        ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $user = User::create($request->all());
-
-        return response()->json($user, 201);
+        ], 201);
     }
 
     /**
