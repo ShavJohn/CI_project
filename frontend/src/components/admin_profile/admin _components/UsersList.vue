@@ -33,7 +33,7 @@ import UpdateUser from './UpdateUser.vue'
     data() {
       return {
         current: 1,
-        perPage: 3,
+        perPage: 5,
         tabe_params: {
             field: [
               {key: 'id'},
@@ -42,12 +42,21 @@ import UpdateUser from './UpdateUser.vue'
               {key: 'actions'},
             ]
         },
-        show: false
+        show: false,
+        skip: 0,
+        take: 5,
       }
     },
     watch: {
       'current': function(val) {
-          this.$store.dispatch('getusersList', val-1)
+
+        this.skip =  (val - 1) * 5;
+
+        let data = {
+        skip: this.skip,
+        take: this.take,
+      }
+          this.$store.dispatch('getusersList', data)
       }
     },
     computed: {
@@ -56,7 +65,11 @@ import UpdateUser from './UpdateUser.vue'
       }
     },
     beforeMount() {
-      this.$store.dispatch('getusersList', 0)
+        let data = {
+        skip: this.skip,
+        take: this.take
+      }
+      this.$store.dispatch('getusersList', data)
     },
     created() {
         this.$root.$on('close_modal', () => {

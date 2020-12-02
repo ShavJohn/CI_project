@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Pageinate;
+use App\Http\Requests\UpdateUser;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -14,10 +16,10 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($page)
+    public function index(Pageinate $request)
     {
-        $take = 3;
-        $skip = $page * 3;
+        $take = $request->take;
+        $skip = $request->skip;
         $count = User::count();
         $users = User::skip($skip)->take($take)->get();
         return response()->json([
@@ -63,7 +65,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(User $user, Request $request)
+    public function update(User $user, UpdateUser $request)
     {
         $user->update([
             'name' => $request->get('name'),

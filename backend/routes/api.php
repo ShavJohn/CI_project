@@ -27,7 +27,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
 
     Route::group(['middleware' => 'admin'], function () {
-        Route::get('/users/{page}', 'Admin\UsersController@index');
+        Route::get('/users', 'Admin\UsersController@index');
         Route::get('/user/{user}', 'Admin\UsersController@show');
         Route::post('/users', 'Admin\UsersController@store');
         Route::put('/user/{user}', 'Admin\UsersController@update');

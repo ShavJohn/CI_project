@@ -26,7 +26,7 @@ export default {
   actions: {
     getusersList(context, data){
       return new Promise((resolve, reject) => {
-        axios.get(`/users/${data}`).then((res) => {
+        axios.get('/users', {params: data}).then((res) => {
           context.commit('users_list_setter', res.data)
           resolve(res)
         }).catch(() => {
